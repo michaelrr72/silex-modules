@@ -14,18 +14,33 @@ class UsersController implements ControllerProviderInterface
   {
     // creates a new controller based on the default route
     $controller = $app['controllers_factory'];
+     $users = $app['session']->get('users');
+      if(!isset ($users)){
+        $users = array(
+        array(
+          'nombre'=>'michael',
+          'apellido'=>'o.o',
+          'direccion'=>'asd',
+          'email'=>'asd@asd.com',
+          'telefono'=>07
+          )
+        );
+        $app['session']->set('users',$users);
+      }
 
     // la ruta "/users/list"
     $controller->get('/list', function() use($app) {
 
       // obtiene el nombre de usuario de la sesión
       $user = $app['session']->get('user');
+      $users = $app['session']->get('users');
 
       // ya ingreso un usuario ?
       if ( isset( $user ) && $user != '' ) {
         // muestra la plantilla
         return $app['twig']->render('Users/users.list.html.twig', array(
-          'user' => $user
+          'user' => $user,
+          'users' =>$users
         ));
 
       } else {
@@ -36,8 +51,8 @@ class UsersController implements ControllerProviderInterface
     // hace un bind
     })->bind('users-list');
 
-    // la ruta "/users/edit"
-    $controller->get('/edit', function() use($app) {
+    // la ruta "/users-edit"
+    $controller->get('/users-edit', function() use($app) {
 
       // obtiene el nombre de usuario de la sesión
       $user = $app['session']->get('user');
@@ -56,6 +71,22 @@ class UsersController implements ControllerProviderInterface
 
     // hace un bind
     })->bind('users-edit');
+
+    $controller->post('/user-save', function(Request $request) use($app){
+      $users = $app['session']->get('users');
+
+      $users[] = array(
+        'nombre' => $request->get('nombre'),
+        'apellido' => $request->get('apellido'),
+        'direccion' => $request->get('direccion'),
+        'email' => $request->get('email'),
+        'telefono' => $request->get('telefono')
+      );
+
+        $app['session']->set('users', $users);
+
+      return $app->redirect( $app['url_generator']->generate('users-list'));
+    })->bind('user-save');
 
     return $controller;
   }

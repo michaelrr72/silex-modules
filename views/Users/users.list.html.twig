@@ -8,7 +8,7 @@
 	<div class="row">
 
     <div class="col-md-12">
-      <legend>LIsta de Usuarios</legend>
+      <legend>Lista de Usuarios</legend>
 
       <div class="table-responsive">
 
@@ -26,13 +26,13 @@
           </thead>
 
           <tbody>
-
+          {% for u in users %}
             <tr>
-              <td>Mohsin</td>
-              <td>Irshad</td>
-              <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-              <td>isometric.mohsin@gmail.com</td>
-              <td>+923335586757</td>
+              <td>{{ u.nombre }}</td>
+              <td>{{ u.apellido }}</td>
+              <td>{{ u.direccion }}</td>
+              <td>{{ u.email }}</td>
+              <td>{{ u.telefono }}</td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Editar">
                   <button class="btn btn-primary btn-xs" data-title="Editar" >
@@ -48,7 +48,7 @@
                 </p>
               </td>
             </tr>
-
+            {% endfor %}
           </tbody>
 
         </table>
