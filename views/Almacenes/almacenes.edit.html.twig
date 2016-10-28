@@ -1,0 +1,67 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Editar Almacen' %}
+
+{% block body %}
+
+<form class="form-horizontal" method="post" action="{{ url('almacen-save') }}">
+  <fieldset>
+
+    <!-- Titulo -->
+    <legend>Crear o Editar Almacen</legend>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Id</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control input-md"
+            name="id" placeholder="id del almacen" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Nombre</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control input-md"
+            name="nombre" placeholder="nombre del almacen" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Dirección</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control input-md"
+            name="direccion" placeholder="dirección del almacen" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Ciudad</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control input-md"
+            name="ciudad" placeholder="ciudad" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Sitio Web</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control input-md"
+            name="sitio" placeholder="sitio web" required="">
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="form-group">
+      <div class="col-md-8">
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit" >Guardar</button>
+          <button class="btn btn-primary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
+
+{% endblock %}
